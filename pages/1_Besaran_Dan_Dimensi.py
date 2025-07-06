@@ -69,4 +69,4 @@ st.info(f'Dimensi untuk {rumus} adalah: {dimensi_dict[rumus]}')
 
 # === KREDIT ===
 st.markdown('---')
-st.caption('Disusun untuk pembelajaran Fisika SMA oleh Pak Andy Kurniawan, S.Si - SMA Negeri 1 Dolopo')
+st.caption('Disusun untuk pembelajaran Fisika SMA oleh Andy Kurniawan, S.Si - SMA Negeri 1 Dolopo')
