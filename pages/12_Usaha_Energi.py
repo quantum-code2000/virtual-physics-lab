@@ -14,11 +14,11 @@ if pilihan == 'Usaha (W)':
     theta = st.number_input('Sudut antara gaya dan arah gerak (θ) dalam derajat', value=0.0)
     W = F * s * np.cos(np.radians(theta))
     st.success(f'Usaha: W = {W:.2f} Joule')
-    # Visualisasi
+
     fig, ax = plt.subplots()
     ax.arrow(0, 0, s, 0, head_width=1, head_length=0.5, fc='green', ec='green')
     ax.arrow(0, 0, F * np.cos(np.radians(theta))/2, F * np.sin(np.radians(theta))/2, 
-              head_width=1, head_length=0.5, fc='blue', ec='blue')
+             head_width=1, head_length=0.5, fc='blue', ec='blue')
     ax.text(s/2, 1.5, 's', color='green')
     ax.text(F * np.cos(np.radians(theta))/2, F * np.sin(np.radians(theta))/2 + 0.5, 'F', color='blue')
     ax.set_xlim(-1, max(6, s + 2))
@@ -34,14 +34,14 @@ elif pilihan == 'Energi Potensial (Ep)':
     h = st.number_input('Ketinggian (h) dalam meter', value=10.0)
     Ep = m * g * h
     st.success(f'Energi Potensial: Ep = {Ep:.2f} Joule')
-    st.image('https://upload.wikimedia.org/wikipedia/commons/2/27/Potential_Energy_Gravity.png', width=400)
+    st.image('assets/energi_potensial.png', width=400)
 
 else:
     m = st.number_input('Massa (m) dalam kg', value=1.5)
     v = st.number_input('Kecepatan (v) dalam m/s', value=4.0)
     Ek = 0.5 * m * v**2
     st.success(f'Energi Kinetik: Ek = {Ek:.2f} Joule')
-    st.image('https://upload.wikimedia.org/wikipedia/commons/f/f3/Kinetic_energy.png', width=400)
+    st.image('assets/energi_kinetik.png', width=400)
 
 st.markdown('---')
 st.caption('Disusun untuk pembelajaran Fisika SMA oleh Andy Kurniawan, S.Si - SMA Negeri 1 Dolopo')
