@@ -11,7 +11,7 @@ if pilihan == 'Hukum Newton I':
     st.subheader('Hukum Newton I')
     st.info('''Jika resultan gaya yang bekerja pada suatu benda sama dengan nol,
 maka benda akan tetap diam atau bergerak lurus beraturan.''')
-    st.image('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Newton%27s_First_Law.svg/640px-Newton%27s_First_Law.svg.png', width=400)
+    st.image('assets/hukum_newton1.png', width=400)
     st.markdown('Contoh: Buku yang diam di atas meja akan tetap diam jika tidak ada gaya luar.')
 
 elif pilihan == 'Hukum Newton II':
@@ -49,7 +49,7 @@ elif pilihan == 'Hukum Newton II':
 else:
     st.subheader('Hukum Newton III')
     st.info('''Setiap aksi selalu ada reaksi yang sama besar dan berlawanan arah.''')
-    st.image('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Newton%27s_cradle_animation_book_2.gif/320px-Newton%27s_cradle_animation_book_2.gif')
+    st.image('assets/hukum_newton3.png', width=400)
     st.markdown('Contoh: Ketika menekan dinding, dinding juga mendorong balik dengan gaya yang sama.')
 
 st.markdown('---')
