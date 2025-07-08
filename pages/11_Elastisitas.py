@@ -9,7 +9,7 @@ st.markdown('---')
 st.subheader('Pilih variabel yang ingin dihitung')
 hitung = st.selectbox('Hitung:', ['Gaya (F)', 'Konstanta Pegas (k)', 'Pertambahan Panjang (Δx)'])
 
-# Variabel default
+# Default nilai
 k, dx, F = 100.0, 0.05, 5.0
 
 if hitung == 'Gaya (F)':
@@ -28,22 +28,31 @@ else:
     dx = F / k if k != 0 else 0
     st.success(f'Pertambahan panjang Δx = {dx:.4f} m')
 
-# Visualisasi pegas zig-zag
 st.markdown('---')
-st.subheader('Visualisasi Pegas Sebelum dan Sesudah Diberi Gaya')
-def draw_spring(ax, x_center, y_start, y_end, color='blue', label='Pegas', turns=6):
-    length = y_end - y_start
-    y = np.linspace(y_start, y_end, 100)
-    x = x_center + 0.05 * np.sin(2 * np.pi * turns * (y - y_start) / length)
-    ax.plot(x, y, color=color, linewidth=2, label=label)
+st.subheader('Visualisasi Pegas Skala Realistis')
 
-fig, ax = plt.subplots(figsize=(2, 5))
-draw_spring(ax, x_center=0.2, y_start=0.2, y_end=1.5, color='gray', label='Pegas awal')
-draw_spring(ax, x_center=0.5, y_start=0.2, y_end=1.5 + dx*10, color='blue', label='Pegas sesudah')
-ax.set_xlim(-0.2, 0.8)
-ax.set_ylim(0, 2.5)
-ax.set_title('Pegas sebelum dan sesudah diberi gaya')
+def draw_spring(ax, x, y0, length, color, label):
+    y = np.linspace(y0, y0 + length, 120)
+    zigzag = 0.05 * np.sin(15 * np.pi * (y - y0) / length)
+    ax.plot(x + zigzag, y, color=color, linewidth=2, label=label)
+
+y0 = 0.5
+panjang_awal = 1.0
+panjang_akhir = panjang_awal + dx
+
+fig, ax = plt.subplots(figsize=(3, 6))
+draw_spring(ax, 0.2, y0, panjang_awal, 'gray', 'Pegas awal')
+draw_spring(ax, 0.5, y0, panjang_akhir, 'blue', 'Pegas sesudah')
+
+# Tambah label dan garis skala
+ax.annotate(f'{panjang_awal:.2f} m', (0.05, y0 + panjang_awal/2), fontsize=9)
+ax.annotate(f'{dx:.2f} m', (0.6, y0 + panjang_awal + dx/2), fontsize=9, color='blue')
+ax.annotate(f'{panjang_akhir:.2f} m', (0.55, y0 + panjang_akhir + 0.05), fontsize=9, color='blue')
+
+ax.set_xlim(-0.2, 1.0)
+ax.set_ylim(0, y0 + panjang_akhir + 0.6)
 ax.axis('off')
+ax.set_title('Perbandingan Panjang Pegas Sebelum dan Sesudah Diberi Gaya')
 ax.legend(loc='upper right')
 st.pyplot(fig)
 
