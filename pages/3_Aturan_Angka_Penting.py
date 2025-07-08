@@ -78,4 +78,4 @@ except:
     st.warning('Input tidak valid')
 
 st.markdown('---')
-st.caption('Disusun untuk pembelajaran Fisika SMA oleh Pak Andy Kurniawan, S.Si - SMA Negeri 1 Dolopo')
+st.caption('Disusun untuk pembelajaran Fisika SMA oleh Andy Kurniawan, S.Si - SMA Negeri 1 Dolopo')
