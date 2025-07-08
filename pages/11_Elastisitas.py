@@ -1,5 +1,6 @@
 import streamlit as st
 import matplotlib.pyplot as plt
+import numpy as np
 
 st.set_page_config(page_title='Elastisitas (Hukum Hooke)', layout='wide')
 st.title('Simulasi Elastisitas - Hukum Hooke')
@@ -7,6 +8,9 @@ st.markdown('---')
 
 st.subheader('Pilih variabel yang ingin dihitung')
 hitung = st.selectbox('Hitung:', ['Gaya (F)', 'Konstanta Pegas (k)', 'Pertambahan Panjang (Δx)'])
+
+# Variabel default
+k, dx, F = 100.0, 0.05, 5.0
 
 if hitung == 'Gaya (F)':
     k = st.number_input('Konstanta pegas (k) dalam N/m', value=100.0)
@@ -24,19 +28,23 @@ else:
     dx = F / k if k != 0 else 0
     st.success(f'Pertambahan panjang Δx = {dx:.4f} m')
 
-# Visualisasi pegas
+# Visualisasi pegas zig-zag
 st.markdown('---')
-st.subheader('Visualisasi Pegas')
-fig, ax = plt.subplots(figsize=(6, 2))
-pegas_awal = [0, 0.5]
-pegas_akhir = [0, 0.5 + (dx if 'dx' in locals() else 0.05)]
-ax.plot([0, 1], pegas_awal, 'gray', lw=8, label='Pegas sebelum')
-ax.plot([0, 1], pegas_akhir, 'blue', lw=8, label='Pegas sesudah')
-ax.set_xlim(-0.5, 1.5)
-ax.set_ylim(0, 1.5)
-ax.set_title('Pegas memanjang akibat gaya')
+st.subheader('Visualisasi Pegas Sebelum dan Sesudah Diberi Gaya')
+def draw_spring(ax, x_center, y_start, y_end, color='blue', label='Pegas', turns=6):
+    length = y_end - y_start
+    y = np.linspace(y_start, y_end, 100)
+    x = x_center + 0.05 * np.sin(2 * np.pi * turns * (y - y_start) / length)
+    ax.plot(x, y, color=color, linewidth=2, label=label)
+
+fig, ax = plt.subplots(figsize=(2, 5))
+draw_spring(ax, x_center=0.2, y_start=0.2, y_end=1.5, color='gray', label='Pegas awal')
+draw_spring(ax, x_center=0.5, y_start=0.2, y_end=1.5 + dx*10, color='blue', label='Pegas sesudah')
+ax.set_xlim(-0.2, 0.8)
+ax.set_ylim(0, 2.5)
+ax.set_title('Pegas sebelum dan sesudah diberi gaya')
 ax.axis('off')
-ax.legend()
+ax.legend(loc='upper right')
 st.pyplot(fig)
 
 st.markdown('---')
